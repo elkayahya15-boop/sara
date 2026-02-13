@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For You 💖</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  font-family:"Georgia","Times New Roman",cursive;
+  font-style:italic;
+}
+
+body{
+  margin:0;
+  min-height:100vh;
+  background:linear-gradient(135deg,#ff9acb,#ffd1e8);
+  overflow:hidden;
+}
+
+/* ================= HEARTS ================= */
+.heart{
+  position:absolute;
+  width:18px;
+  height:18px;
+  background:#ff5fa2;
+  transform:rotate(45deg);
+  animation:float 8s infinite;
+  opacity:.7;
+}
+.heart::before,.heart::after{
+  content:"";
+  position:absolute;
+  width:18px;
+  height:18px;
+  background:#ff5fa2;
+  border-radius:50%;
+}
+.heart::before{top:-9px;left:0;}
+.heart::after{left:-9px;top:0;}
+@keyframes float{
+  0%{bottom:-30px;opacity:0;}
+  20%{opacity:1;}
+  100%{bottom:120%;opacity:0;}
+}
+
+/* ================= PAGE ================= */
+.page{
+  position:absolute;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+}
+
+.box{
+  background:#fff0f6;
+  padding:30px;
+  border-radius:30px;
+  width:min(90%,420px);
+  text-align:center;
+  box-shadow:0 25px 50px rgba(0,0,0,.25);
+}
+
+.hidden{display:none}
+h1,h2{color:#ff4f9a}
+
+/* ================= BUTTONS ================= */
+button{
+  border:none;
+  padding:12px 24px;
+  border-radius:25px;
+  cursor:pointer;
+}
+.yes{background:#ff4f9a;color:white;}
+.no{background:#ffd1e8;color:#b3005e}
+
+/* ================= CARD ================= */
+.card{
+  width:min(95%,500px);
+  height:650px;
+  perspective:1200px;
+}
+.inner{
+  width:100%;
+  height:100%;
+  transform-style:preserve-3d;
+  transition:1s;
+}
+.card:hover .inner{transform:rotateY(180deg)}
+.face{
+  position:absolute;
+  inset:0;
+  padding:30px;
+  border-radius:35px;
+  backface-visibility:hidden;
+  box-shadow:0 30px 60px rgba(0,0,0,.3);
+}
+.front{background:#fff0f6}
+.back{
+  background:radial-gradient(circle,#ffffff,#ffffff);
+  color:white;
+  transform:rotateY(180deg);
+}
+
+.pics{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+.pics img{
+  width:100%;
+  border-radius:18px;
+}
+
+/* ================= FINAL PAGE ================= */
+.big-letter{
+  width:min(95%,800px);
+  min-height:70vh;
+  background:#fff0f6;
+  border-radius:40px;
+  padding:40px;
+  box-shadow:0 35px 70px rgba(0,0,0,.3);
+  text-align:center;
+  animation:fadeIn 2s ease forwards;
+}
+@keyframes fadeIn{
+  from{opacity:0;transform:translateY(30px)}
+  to{opacity:1;transform:none}
+}
+
+#typing{
+  color:#b3005e;
+  font-size:1.1rem;
+  line-height:1.8;
+  white-space:pre-wrap;
+  min-height:260px;
+}
+
+/* HEART BUTTON */
+.heart-btn{
+  position:relative;
+  width:70px;
+  height:70px;
+  background:#ff4f9a;
+  transform:rotate(45deg);
+  border:none;
+  margin:25px;
+  cursor:pointer;
+  box-shadow:0 0 25px #ff6fb1;
+}
+.heart-btn::before,.heart-btn::after{
+  content:"";
+  position:absolute;
+  width:70px;
+  height:70px;
+  background:#ff4f9a;
+  border-radius:50%;
+}
+.heart-btn::before{top:-35px;left:0;}
+.heart-btn::after{left:-35px;top:0;}
+.heart-btn span{
+  position:absolute;
+  inset:0;
+  transform:rotate(-45deg);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:white;
+}
+
+/* MOBILE */
+@media(max-width:480px){
+  #typing{font-size:1rem}
+}
+</style>
+</head>
+<body>
+
+<script>
+for(let i=0;i<50;i++){
+  let h=document.createElement("div");
+  h.className="heart";
+  h.style.left=Math.random()*100+"%";
+  h.style.animationDelay=Math.random()*8+"s";
+  document.body.appendChild(h);
+}
+</script>
+
+<!-- PAGE 1 -->
+<div class="page" id="p1">
+  <div class="box">
+    <h1>Will you be my Valentine? 💕</h1>
+    <button class="yes" id="yesBtn" onclick="goCode()">YES 💖</button>
+    <button class="no" onclick="growYes()">NO 🙃</button>
+  </div>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page hidden" id="p2">
+  <div class="box">
+    <h1>Enter the Code 💗</h1>
+    <input id="code" placeholder="••••">
+    <br><br>
+    <button class="yes" onclick="unlock()">Open 💕</button>
+    <p>Hint: our birth years 💖</p>
+  </div>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page hidden" id="p3">
+  <audio id="bg-music" loop>
+  <source src="dont.mp3" type="audio/mpeg">
+</audio>
+
+  <div class="card">
+    <div class="inner">
+      <div class="face front">
+        <h2>to my lovely gf</h2>
+        <p>
+           This little card is for u a sara💕it been the best 5 months i been happy lately u helped me trough alot and u was always there so u really deserve this card abb .
+        </p>
+        <div class="pics">
+          
+          <img src="c:\Users\HP\Desktop\2026-02-10 22.51.48.jpg">
+          <img src="c:\Users\HP\Desktop\7a3668b1-e72a-4ca5-8dd3-64b0f4f6b479.jfif">
+        </div>
+      </div>
+
+      <div class="face back">
+        <h2>i love everything about you a sara from your looks to the personality everything kolxi. 
+            i know u can tell that my fav part of you physically is your eyes they all big and gorgeous everytime u look at me with them i get drown into your beauty ,i feel it i feel your gaze looking at me everytime when m not looking at you , i love it everytime i look at you n hit me with that why u look at me but dont worry i just be admiring our beauty.
+            personnality wise i admire your yapping the way you talk the way you talk about any subject even the boring one u make em fun to listen to . 
+           
+       
+        </a>
+        <br><br>
+        <button class="yes" onclick="finalPage()">Next 💕</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE 4 -->
+<div class="page hidden" id="p4">
+  <audio id="bg-music" loop>
+  <source src="dont.mp3" type="audio/mpeg">
+</audio>
+
+  <div class="big-letter">
+    <h2>For u my love💗</h2>
+    <div id="typing"></div>
+    <button class="heart-btn"><span>LOVE</span></button>
+  </div>
+</div>
+
+<script>
+let scale=1;
+function growYes(){
+  scale+=0.3;
+  yesBtn.style.transform=`scale(${scale})`;
+}
+function goCode(){
+  p1.classList.add("hidden");
+  p2.classList.remove("hidden");
+}
+function unlock(){
+  if(code.value==="0608"){
+    p2.classList.add("hidden");
+    p3.classList.remove("hidden");
+  }
+}
+function finalPage(){
+  p3.classList.add("hidden");
+  p4.classList.remove("hidden");
+  typeText();
+}
+
+/* TYPING */
+const text = `
+sara you are what i ever wanted and wished for in a girl u are pure in every aspect every thing about you is gorgeous your so talkative when your in the mood but just know i cant picture anyone else holding you beside me every time i hold u down every time i hug you i feel so peacefull hope u feeling safe with me too ,we went trough alot togheter thats why i want it to be you ,i want this to be forever n hopfully this wouldnt b our last valentine together all love yahya.💖
+
+Happy Valentine’s Day 💕
+`;
+let i=0;
+function typeText(){
+  if(i<text.length){
+    typing.textContent+=text.charAt(i);
+    i++;
+    setTimeout(typeText,40);
+  }
+}
+</script>
+
+</body>
+</html>
